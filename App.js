@@ -1,11 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 export default class App extends React.Component {
+  state = {
+    isLoaded: false,
+  };
   render() {
+    const { isLoaded } = this.state;
     return (
       <View style={styles.container}>
-        <Text>fucking awesome</Text>
+        {isLoaded ? null : (
+          <View style={styles.loading}>
+            <Text style={styles.loadingText}>완전 심플한 기상청</Text>
+          </View>
+        )}
       </View>
     );
   }
@@ -15,7 +23,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+  loading: {
+    flex: 1,    // flex: 화면에서 어느 정도의 비율을 사용할지 설정
+    backgroundColor: '#FDF6AA',
+    justifyContent: 'flex-end',
+    paddingLeft: 40,
+
+  },
+  loadingText: {
+    fontSize: 38,
+    marginBottom: 100,
+  }
 });
