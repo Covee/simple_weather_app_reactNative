@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import Weather from "./Weather";
+
 
 export default class App extends React.Component {
   state = {
@@ -9,7 +11,9 @@ export default class App extends React.Component {
     const { isLoaded } = this.state;
     return (
       <View style={styles.container}>
-        {isLoaded ? null : (
+        {!isLoaded ? (
+          <Weather />
+          ) : (
           <View style={styles.loading}>
             <Text style={styles.loadingText}>완전 심플한 기상청</Text>
           </View>
