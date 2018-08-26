@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import Weather from "./Weather";
+import { Ionicons } from "@expo/vector-icons";
 
 
 export default class App extends React.Component {
@@ -11,6 +12,7 @@ export default class App extends React.Component {
     const { isLoaded } = this.state;
     return (
       <View style={styles.container}>
+        <StatusBar hidden={true} />
         {!isLoaded ? (
           <Weather />
           ) : (
