@@ -7,29 +7,33 @@ import { Ionicons } from "@expo/vector-icons";
 export default class App extends React.Component {
   state = {
     isLoaded: false,
+    error: null,
   };
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
-          isLoaded: true
+          isLoaded: true,
         });
       },
       error => {
-        console.log(error);
+        this.setState({
+          error: error
+        });
       }
     );
   }
   render() {
-    const { isLoaded } = this.state;
+    const { isLoaded, error } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
-        {isLoaded ? (
+        {!isLoaded ? (
           <Weather />
           ) : (
           <View style={styles.loading}>
             <Text style={styles.loadingText}>완전 심플한 기상청</Text>
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
           </View>
         )}
       </View>
@@ -52,5 +56,10 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 38,
     marginBottom: 100,
+  },
+  errorText: {
+    color: 'red',
+    backgroundColor: 'transparent',
+    marginBottom: 30,
   }
 });
